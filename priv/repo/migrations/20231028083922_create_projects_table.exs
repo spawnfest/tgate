@@ -5,7 +5,7 @@ defmodule Tgate.Repo.Migrations.CreateProjectsTable do
     create table(:projects) do
       add :name, :string, null: false
 
-      add :owner_id, references(:users, on_delete: :delete_all, on_update: :restrict)
+      add :owner_id, references(:users, on_delete: :delete_all, on_update: :restrict), null: false
 
       timestamps()
     end
