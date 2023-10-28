@@ -55,4 +55,14 @@ defmodule Tgate.DataCase do
       end)
     end)
   end
+
+  @doc """
+  A helper that transofrm changeset errors into a list of messages
+  """
+  def errors_to_list(changeset) do
+    changeset
+    |> errors_on()
+    |> Map.to_list()
+    |> Enum.sort_by(fn {key, _value} -> key end)
+  end
 end
