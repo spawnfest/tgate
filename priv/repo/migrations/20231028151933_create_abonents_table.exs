@@ -6,7 +6,7 @@ defmodule Tgate.Repo.Migrations.CreateAbonentsTable do
       add :name, :string, null: false
       add :status, :string, null: false
 
-      add :invite_code, :integer
+      add :invite_code, :string
       add :telegram_id, :bigint
 
       add :project_id, references(:projects, on_delete: :delete_all, on_update: :restrict),
