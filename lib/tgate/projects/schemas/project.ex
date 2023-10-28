@@ -3,6 +3,7 @@ defmodule Tgate.Projects.Schemas.Project do
 
   import Ecto.Changeset
 
+  alias Tgate.Projects.Schemas.Abonent
   alias Tgate.Projects.Schemas.Owner
 
   @type t :: %__MODULE__{
@@ -10,6 +11,7 @@ defmodule Tgate.Projects.Schemas.Project do
           name: String.t(),
           owner_id: non_neg_integer(),
           owner: Owner.t() | Ecto.Association.NotLoaded.t(),
+          abonents: [Abonent.t()] | Ecto.Association.NotLoaded.t(),
           inserted_at: NaiveDateTime.t(),
           updated_at: NaiveDateTime.t()
         }
@@ -18,6 +20,8 @@ defmodule Tgate.Projects.Schemas.Project do
     field :name, :string
 
     belongs_to :owner, Owner
+
+    has_many :abonents, Abonent, on_delete: :delete_all
 
     timestamps()
   end
