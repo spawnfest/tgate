@@ -10,8 +10,8 @@ defmodule Tgate.Accounts.Schemas.User do
           role: String.t(),
           status: String.t(),
           password: String.t() | nil,
-          inserted_at: DateTime.t(),
-          updated_at: DateTime.t()
+          inserted_at: NaiveDateTime.t(),
+          updated_at: NaiveDateTime.t()
         }
 
   schema "users" do
