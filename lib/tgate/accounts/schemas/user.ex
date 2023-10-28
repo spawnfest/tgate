@@ -38,7 +38,7 @@ defmodule Tgate.Accounts.Schemas.User do
 
   defp put_password_hash(%{valid?: true, changes: %{password: password}} = changeset) do
     changeset
-    |> put_change(:password_hash, password)
+    |> put_change(:password_hash, Argon2.hash_pwd_salt(password))
     |> put_change(:password, nil)
   end
 

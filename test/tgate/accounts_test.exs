@@ -30,6 +30,9 @@ defmodule Tgate.AccountsTest do
   end
 
   test "happy path" do
-    assert {:ok, _user} = Accounts.register_user(%{email: "test@gmail.com", password: "123456"})
+    password = "123456"
+
+    assert {:ok, user} = Accounts.register_user(%{email: "test@gmail.com", password: password})
+    assert user.password_hash != password
   end
 end
