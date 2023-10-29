@@ -8,6 +8,7 @@ defmodule Tgate.TelegramAccounts.Schemas.Abonent do
           invite_code: String.t(),
           project_id: non_neg_integer(),
           telegram_id: nil | integer(),
+          inserted_at: NaiveDateTime.t(),
           updated_at: NaiveDateTime.t()
         }
 
@@ -16,7 +17,8 @@ defmodule Tgate.TelegramAccounts.Schemas.Abonent do
     field :invite_code, :string
     field :project_id, :integer
     field :telegram_id, :integer
-    field :updated_at, :naive_datetime
+
+    timestamps()
   end
 
   def confirm_changeset(entity, attrs) do
@@ -25,5 +27,12 @@ defmodule Tgate.TelegramAccounts.Schemas.Abonent do
     |> validate_required([:telegram_id, :status])
     |> validate_inclusion(:status, ["active"])
     |> unique_constraint([:project_id, :telegram_id])
+  end
+
+  def deactivate_changeset(entity, attrs) do
+    entity
+    |> cast(attrs, [:status])
+    |> validate_required([:status])
+    |> validate_inclusion(:status, ["deactivated"])
   end
 end
