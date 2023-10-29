@@ -1,4 +1,10 @@
 defmodule Tgate.TelegramAccounts do
+  @moduledoc """
+  This context provides functionality to manipulate abonent account from
+  within telegram bot. Also it provides abonent deactivation/reactivation for
+  requests coming from web
+  """
+
   alias Tgate.TelegramAccounts.Commands.ActivateAbonents
   alias Tgate.TelegramAccounts.Commands.ConfirmAbonent
   alias Tgate.TelegramAccounts.Commands.DeactivateAbonent

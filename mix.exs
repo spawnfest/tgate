@@ -51,7 +51,8 @@ defmodule Tgate.MixProject do
       {:argon2_elixir, "~> 4.0"},
       {:nimble_totp, "~> 1.0"},
       {:telegram, github: "visciang/telegram", tag: "1.1.1"},
-      {:hackney, "~> 1.18"}
+      {:hackney, "~> 1.18"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 

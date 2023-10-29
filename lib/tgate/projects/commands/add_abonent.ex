@@ -1,6 +1,6 @@
 defmodule Tgate.Projects.Commands.AddAbonent do
-  alias Tgate.Projects.Schemas.Project
   alias Tgate.Projects.Schemas.Abonent
+  alias Tgate.Projects.Schemas.Project
 
   alias Tgate.Repo
 

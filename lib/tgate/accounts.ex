@@ -1,6 +1,6 @@
 defmodule Tgate.Accounts do
   @moduledoc """
-  Context for registration/login stuff
+  This module provides context interface for manipulating users in system
   """
 
   alias Tgate.Accounts.Commands.RegisterUser

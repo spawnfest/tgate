@@ -1,4 +1,9 @@
 defmodule Tgate.Projects do
+  @moduledoc """
+  This module provides context interface to manipulate user project as well as
+  project abonents
+  """
+
   alias Tgate.Projects.Commands.AddAbonent
   alias Tgate.Projects.Commands.CreateProject
   alias Tgate.Projects.Commands.RefreshAbonentCode

@@ -3,12 +3,12 @@ defmodule TgateWeb.ProjectLive do
 
   import TgateWeb.CoreComponents
 
-  alias Tgate.Projects.Schemas.Abonent
+  alias TgateWeb.Params
+
   alias Tgate.Projects
   alias Tgate.TelegramAccounts
 
   alias TgateWeb.Abonent.CreateParam
-  alias TgateWeb.Params
 
   require Logger
 
