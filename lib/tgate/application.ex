@@ -5,6 +5,8 @@ defmodule Tgate.Application do
 
   use Application
 
+  @bot_token Application.compile_env!(:tgate, :bot_token)
+
   @impl true
   def start(_type, _args) do
     children = [
@@ -20,7 +22,7 @@ defmodule Tgate.Application do
       # {Tgate.Worker, arg}
       {Telegram.Poller,
        bots: [
-         {Tgate.Telegram.Bot, token: System.fetch_env!("BOT_TOKEN"), max_bot_concurrency: 1_000}
+         {Tgate.Telegram.Bot, token: @bot_token, max_bot_concurrency: 1_000}
        ]}
     ]
 

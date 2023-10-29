@@ -54,6 +54,8 @@ config :tgate, nimble_secret: "some_stronk_secret_for_dev"
 
 config :tesla, adapter: {Tesla.Adapter.Hackney, [recv_timeout: 40_000]}
 
+config :tgate, bot_token: System.fetch_env!("BOT_TOKEN")
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

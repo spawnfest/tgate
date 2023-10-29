@@ -5,8 +5,6 @@ defmodule Tgate.Projects.Commands.RefreshAbonentCode do
 
   @secret Application.compile_env!(:tgate, :nimble_secret)
 
-  @five_minutes_in_seconds 5 * 60
-
   @spec execute(abonent :: Abonent.t()) ::
           {:ok, Abonent.t()} | {:error, :code_not_expired} | {:error, Ecto.Changeset.t()}
   def execute(%Abonent{invite_code: code} = abonent) do
@@ -26,6 +24,6 @@ defmodule Tgate.Projects.Commands.RefreshAbonentCode do
   end
 
   defp invite_code do
-    NimbleTOTP.verification_code(@secret, period: @five_minutes_in_seconds)
+    NimbleTOTP.verification_code(@secret)
   end
 end

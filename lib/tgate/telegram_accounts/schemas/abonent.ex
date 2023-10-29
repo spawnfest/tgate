@@ -4,12 +4,12 @@ defmodule Tgate.TelegramAccounts.Schemas.Abonent do
   import Ecto.Changeset
 
   @type t :: %__MODULE__{
-    status: String.t(),
-    invite_code: String.t(),
-    project_id: non_neg_integer(),
-    telegram_id: nil | integer(),
-    updated_at: NaiveDateTime.t()
-  }
+          status: String.t(),
+          invite_code: String.t(),
+          project_id: non_neg_integer(),
+          telegram_id: nil | integer(),
+          updated_at: NaiveDateTime.t()
+        }
 
   schema "abonents" do
     field :status, :string

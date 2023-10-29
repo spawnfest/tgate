@@ -10,8 +10,6 @@ defmodule Tgate.Projects.Commands.AddAbonent do
 
   @secret Application.compile_env!(:tgate, :nimble_secret)
 
-  @five_minutes_in_seconds 5 * 60
-
   @spec execute(project :: Project.t(), attrs :: attrs()) ::
           {:ok, Abonent.t()} | {:error, Ecto.Changeset.t()}
   def execute(%Project{id: project_id}, attrs) do
@@ -21,7 +19,7 @@ defmodule Tgate.Projects.Commands.AddAbonent do
   end
 
   defp invite_code do
-    NimbleTOTP.verification_code(@secret, period: @five_minutes_in_seconds)
+    NimbleTOTP.verification_code(@secret)
   end
 
   defp insert_abonent(attrs) do

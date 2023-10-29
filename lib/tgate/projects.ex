@@ -2,6 +2,7 @@ defmodule Tgate.Projects do
   alias Tgate.Projects.Commands.CreateProject
   alias Tgate.Projects.Commands.AddAbonent
   alias Tgate.Projects.Commands.RefreshAbonentCode
+  alias Tgate.Projects.Commands.SendCode
 
   alias Tgate.Projects.Queries.OwnerQuery
 
@@ -19,5 +20,9 @@ defmodule Tgate.Projects do
 
   def refresh_abonent_code(abonent) do
     RefreshAbonentCode.execute(abonent)
+  end
+
+  def send_code(abonent) do
+    SendCode.execute(abonent)
   end
 end
