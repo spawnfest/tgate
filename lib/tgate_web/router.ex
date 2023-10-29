@@ -17,10 +17,9 @@ defmodule TgateWeb.Router do
   scope "/", TgateWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", ProjectLive
   end
 
-  # Other scopes may use custom stacks.
   # scope "/api", TgateWeb do
   #   pipe_through :api
   # end

@@ -1,11 +1,31 @@
 defmodule Tgate.Projects.Commands.SendCode do
+  import Ecto.Query
+
   alias Tgate.Projects.Schemas.Abonent
 
   alias Tgate.Repo
 
   @bot_token Application.compile_env!(:tgate, :bot_token)
 
-  def execute(%Abonent{} = abonent) do
+  @spec execute(abonent_id :: integer()) ::
+          {:ok, String.t()} | {:error, :abonent_not_active | :not_found | :abonent_unreachable}
+  def execute(abonent_id) do
+    with {:ok, abonent} <- fetch_abonent(abonent_id) do
+      generate_code_and_send(abonent)
+    end
+  end
+
+  defp fetch_abonent(id) do
+    Abonent
+    |> by_id(id)
+    |> Repo.fetch_one()
+  end
+
+  defp by_id(query, id) do
+    where(query, [a], a.status == ^"active" and a.id == ^id)
+  end
+
+  defp generate_code_and_send(%Abonent{} = abonent) do
     with code <- generate_code(),
          :ok <- send_code(abonent, code) do
       {:ok, code}

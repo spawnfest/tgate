@@ -51,3 +51,5 @@ mix ecto.setup
 ```
 source .env && iex -S mix phx.server
 ```
+
+Now you can navigate to [project showcase page](http://127.0.0.1:4000/)
