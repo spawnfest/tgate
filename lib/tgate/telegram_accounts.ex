@@ -3,6 +3,7 @@ defmodule Tgate.TelegramAccounts do
   alias Tgate.TelegramAccounts.Commands.ConfirmAbonent
   alias Tgate.TelegramAccounts.Commands.DeactivateAbonent
   alias Tgate.TelegramAccounts.Commands.DeactivateAbonents
+  alias Tgate.TelegramAccounts.Commands.ReactivateAbonent
 
   def activate_abonents(telegram_id) do
     ActivateAbonents.execute(telegram_id)
@@ -18,5 +19,9 @@ defmodule Tgate.TelegramAccounts do
 
   def deactivate_abonent(abonent_id) do
     DeactivateAbonent.execute(abonent_id)
+  end
+
+  def reactivate_abonent(abonent_id) do
+    ReactivateAbonent.execute(abonent_id)
   end
 end

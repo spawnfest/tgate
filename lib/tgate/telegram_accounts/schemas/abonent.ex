@@ -35,4 +35,11 @@ defmodule Tgate.TelegramAccounts.Schemas.Abonent do
     |> validate_required([:status])
     |> validate_inclusion(:status, ["deactivated"])
   end
+
+  def reactivate_changeset(entity, attrs) do
+    entity
+    |> cast(attrs, [:status, :invite_code])
+    |> validate_required([:status, :invite_code])
+    |> validate_inclusion(:status, ["pending"])
+  end
 end
