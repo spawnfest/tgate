@@ -49,7 +49,9 @@ defmodule Tgate.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:argon2_elixir, "~> 4.0"},
-      {:nimble_totp, "~> 1.0"}
+      {:nimble_totp, "~> 1.0"},
+      {:telegram, github: "visciang/telegram", tag: "1.1.1"},
+      {:hackney, "~> 1.18"}
     ]
   end
 

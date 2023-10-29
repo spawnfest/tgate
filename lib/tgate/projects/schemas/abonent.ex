@@ -38,11 +38,10 @@ defmodule Tgate.Projects.Schemas.Abonent do
     |> unique_constraint([:project_id, :telegram_id])
   end
 
-  def confirm_changeset(entity, attrs) do
+  def deactivate_changeset(entity, attrs) do
     entity
-    |> cast(attrs, [:invite_code, :status, :telegram_id])
-    |> validate_required([:telegram_id, :status])
-    |> validate_inclusion(:status, ["active"])
-    |> unique_constraint([:project_id, :telegram_id])
+    |> cast(attrs, [:status])
+    |> validate_required([:status])
+    |> validate_inclusion(:status, ["deactivated"])
   end
 end

@@ -2,7 +2,6 @@ defmodule Tgate.Projects do
   alias Tgate.Projects.Commands.CreateProject
   alias Tgate.Projects.Commands.AddAbonent
   alias Tgate.Projects.Commands.RefreshAbonentCode
-  alias Tgate.Projects.Commands.ConfirmAbonent
 
   alias Tgate.Projects.Queries.OwnerQuery
 
@@ -20,9 +19,5 @@ defmodule Tgate.Projects do
 
   def refresh_abonent_code(abonent) do
     RefreshAbonentCode.execute(abonent)
-  end
-
-  def confirm_abonent(code, telegram_id) do
-    ConfirmAbonent.execute(code, telegram_id)
   end
 end

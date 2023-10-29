@@ -15,9 +15,13 @@ defmodule Tgate.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Tgate.PubSub},
       # Start the Endpoint (http/https)
-      TgateWeb.Endpoint
+      TgateWeb.Endpoint,
       # Start a worker by calling: Tgate.Worker.start_link(arg)
       # {Tgate.Worker, arg}
+      {Telegram.Poller,
+       bots: [
+         {Tgate.Telegram.Bot, token: System.fetch_env!("BOT_TOKEN"), max_bot_concurrency: 1_000}
+       ]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
