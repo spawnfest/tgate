@@ -40,9 +40,4 @@ defmodule Tgate.ProjectsTest do
       assert {:ok, _project} = Projects.create_project(owner, %{name: "My first project"})
     end
   end
-
-  describe "add_abonent/2" do
-    test "" do
-    end
-  end
 end
