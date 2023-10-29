@@ -1,8 +1,14 @@
 defmodule TgateWeb.ProjectLive do
   use Phoenix.LiveView
 
+  import TgateWeb.CoreComponents
+
+  alias Tgate.Projects.Schemas.Abonent
   alias Tgate.Projects
   alias Tgate.TelegramAccounts
+
+  alias TgateWeb.Abonent.CreateParam
+  alias TgateWeb.Params
 
   require Logger
 
@@ -61,6 +67,12 @@ defmodule TgateWeb.ProjectLive do
           <% end %>
         </tbody>
       </table>
+      <.simple_form for={@form} phx-change="validate" phx-submit="save">
+        <.input field={@form[:name]} label="Name" />
+        <:actions>
+          <.button>Save</.button>
+        </:actions>
+      </.simple_form>
     </div>
     """
   end
@@ -69,7 +81,15 @@ defmodule TgateWeb.ProjectLive do
     # Showcase hardcode
     {:ok, project} = Projects.fetch_project(1)
 
-    {:ok, assign(socket, :project, project)}
+    form =
+      CreateParam
+      |> Params.change()
+      |> to_form()
+
+    {:ok,
+     socket
+     |> assign(:project, project)
+     |> assign(:form, form)}
   end
 
   def handle_event("deactivate_abonent:" <> id, _params, socket) do
@@ -118,6 +138,40 @@ defmodule TgateWeb.ProjectLive do
       {:error, _error} ->
         Logger.error("Failed to send refreshed code")
         {:noreply, put_flash(socket, :error, "Failed to send refreshed code")}
+    end
+  end
+
+  def handle_event("validate", %{"create_param" => params}, socket) do
+    form =
+      CreateParam
+      |> Params.change(params)
+      |> Map.put(:action, :insert)
+      |> to_form()
+
+    {:noreply, assign(socket, form: form)}
+  end
+
+  def handle_event("save", %{"create_param" => params}, socket) do
+    form =
+      CreateParam
+      |> Params.change()
+      |> to_form()
+
+    with {:ok, params} <- Params.apply(CreateParam, params),
+         params <- Map.from_struct(params),
+         {:ok, project} <- Projects.fetch_project(1),
+         {:ok, abonent} <- Projects.add_abonent(project, params),
+         {:ok, project} <- Projects.fetch_project(1) do
+      Logger.info("CREATED ABONENT. Please Enter code in telegram: #{abonent.invite_code}")
+
+      {:noreply,
+       socket
+       |> assign(:project, project)
+       |> assign(:form, form)}
+    else
+      _ ->
+        Logger.error("Failed to add abonent")
+        {:noreply, assign(socket, :form, form)}
     end
   end
 
