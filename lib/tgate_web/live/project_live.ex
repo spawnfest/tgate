@@ -78,6 +78,7 @@ defmodule TgateWeb.ProjectLive do
       {:noreply, update(socket, :project, project)}
     else
       _ ->
+        Logger.error("Failed to deactivate account")
         {:noreply, socket}
     end
   end
@@ -85,9 +86,11 @@ defmodule TgateWeb.ProjectLive do
   def handle_event("send_code:" <> id, _params, socket) do
     case send_code(id) do
       {:ok, _code} ->
+        Logger.info("Code sent")
         {:noreply, put_flash(socket, :info, "Code sent")}
 
       {:error, _error} ->
+        Logger.error("Failed to send code")
         {:noreply, put_flash(socket, :error, "Failed to send code")}
     end
   end
@@ -100,6 +103,7 @@ defmodule TgateWeb.ProjectLive do
         {:noreply, put_flash(socket, :info, message)}
 
       {:error, _error} ->
+        Logger.error("Failed to reactivate")
         {:noreply, put_flash(socket, :error, "Failed to reactivate")}
     end
   end
@@ -112,6 +116,7 @@ defmodule TgateWeb.ProjectLive do
         {:noreply, put_flash(socket, :info, message)}
 
       {:error, _error} ->
+        Logger.error("Failed to send refreshed code")
         {:noreply, put_flash(socket, :error, "Failed to send refreshed code")}
     end
   end

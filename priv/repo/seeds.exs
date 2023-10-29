@@ -5,7 +5,10 @@ defmodule Tgate.Seeds do
   def seed! do
     user = seed_user!()
 
-    seed_project!(user)
+    user
+    |> seed_project!()
+    |> seed_abonent!()
+
     :ok
   end
 
@@ -18,9 +21,14 @@ defmodule Tgate.Seeds do
     {:ok, project} =
       user
       |> Projects.exchange_for_owner()
-      |> Projects.create_project(%{name: "SpawnFest 2023 Project"})
+      |> Projects.create_project(%{name: "SpawnFest 2023"})
 
     project
+  end
+
+  defp seed_abonent!(project) do
+    {:ok, abonent} = Projects.add_abonent(project, %{name: "Shinobu"})
+    abonent
   end
 end
 
